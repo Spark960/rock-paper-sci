@@ -15,47 +15,53 @@ function getcompcho()
         return "Paper"
     }
 }
-function gethumancho()
-{
-    return prompt("What is your choice?");
-
-}
 function capitalize(str)
 {
     return str[0].toUpperCase() + str.slice(1).toLowerCase();
 }
 
-function playRound()
+function playRound(human)
 {
     comcho = getcompcho();
-    humancho = capitalize(gethumancho());
+    humancho = capitalize(human);
+    let result = document.querySelector("#result");
+
    if(comcho === humancho)
    {
-    console.log("It's a tie")
+    result.textContent = "It's a tie"
    }
    else if((humancho === "Rock" && comcho === "Scissors") || (humancho === "Paper" && comcho === "Rock") || (humancho === "Scissors" && comcho === "Paper"))
    {
-    console.log(`You win, ${humancho} beats ${comcho}`);
+    result.textContent = `You win, ${humancho} beats ${comcho}`;
     humanscore++;
    }
    else if((comcho === "Rock" && humancho === "Scissors") || (comcho === "Paper" && humancho === "Rock") || (comcho === "Scissors" && humancho === "Paper"))
    {
-    console.log(`You lose, ${comcho} beats ${humancho}`);
+    result.textContent = `You lose, ${comcho} beats ${humancho}`;
     comscore++;
    }
+   let score = document.querySelector("#score");
+   score.textContent = `Computer Score is ${comscore}, Human Score is ${humanscore}`;
+
 
 }
 
-function playGame()
-{
-    let i = 0;
-    for(i = 0; i < 5; i++)
-    {
-        playRound();
-        print(console.log(`Computer score is ${comscore}, Human Score is ${humanscore}`))
+let btns = document.querySelectorAll("button");
 
+btns.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    const choice = event.target.id;
+    switch (choice) {
+      case "rock":
+        playRound("rock");
+        break;
+      case "paper":
+        playRound("paper");
+        break;
+      case "scissors":
+        playRound("scissors");
+        break;
     }
+  });
+});
 
-}
-
-playGame();
