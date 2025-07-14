@@ -40,6 +40,20 @@ function playRound(human)
     result.textContent = `You lose, ${comcho} beats ${humancho}`;
     comscore++;
    }
+   if(comscore === 5 || humanscore === 5)
+   {
+    if(comscore === 5)
+    {
+        result.textContent = "Computer Wins";
+    }
+    if(humanscore === 5)
+    {
+        result.textContent = "Human Wins";
+    }
+    btns.forEach((btn) => {
+        btn.disabled = true;
+    })
+   }
    let score = document.querySelector("#score");
    score.textContent = `Computer Score is ${comscore}, Human Score is ${humanscore}`;
 
